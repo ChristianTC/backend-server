@@ -16,7 +16,7 @@ app.get('/', (req, res, next) => {
 
     Medico.find({})
         .skip(desde)
-        .limit(5)
+        .limit(200)
         .populate('usuario', 'nombre email')
         .populate('hospital')
         .exec(
@@ -25,7 +25,7 @@ app.get('/', (req, res, next) => {
                 if (err) {
                     return res.status(500).json({
                         ok: false,
-                        mensaje: 'Error cargando medico',
+                        mensaje: 'Error cargando consulta',
                         errors: err
                     });
                 }
@@ -57,7 +57,7 @@ app.get('/:id', (req, res) => {
             if (err) {
                 return res.status(500).json({
                     ok: false,
-                    mensaje: 'Error al buscar medico',
+                    mensaje: 'Error al buscar consulta',
                     errors: err
                 });
             }
@@ -65,8 +65,8 @@ app.get('/:id', (req, res) => {
             if (!medico) {
                 return res.status(400).json({
                     ok: false,
-                    mensaje: 'El medico con el id ' + id + ' no existe',
-                    errors: { message: 'No existe un medico con ese ID' }
+                    mensaje: 'La consulta con la id ' + id + ' no existe',
+                    errors: { message: 'No existe una consulta con ese ID' }
                 });
             }
 
@@ -94,7 +94,7 @@ app.put('/:id', mdAutenticacion.verificaToken, (req, res) => {
         if (err) {
             return res.status(500).json({
                 ok: false,
-                mensaje: 'Error al buscar medico',
+                mensaje: 'Error al buscar consulta',
                 errors: err
             });
         }
@@ -102,8 +102,8 @@ app.put('/:id', mdAutenticacion.verificaToken, (req, res) => {
         if (!medico) {
             return res.status(400).json({
                 ok: false,
-                mensaje: 'El medico con el id ' + id + ' no existe',
-                errors: { message: 'No existe un medico con ese ID' }
+                mensaje: 'La consulta con el id ' + id + ' no existe',
+                errors: { message: 'No existe una consulta con ese ID' }
             });
         }
 
@@ -117,7 +117,7 @@ app.put('/:id', mdAutenticacion.verificaToken, (req, res) => {
             if (err) {
                 return res.status(400).json({
                     ok: false,
-                    mensaje: 'Error al actualizar medico',
+                    mensaje: 'Error al actualizar consulta',
                     errors: err
                 });
             }
@@ -153,7 +153,7 @@ app.post('/', mdAutenticacion.verificaToken, (req, res) => {
         if (err) {
             return res.status(400).json({
                 ok: false,
-                mensaje: 'Error al crear medico',
+                mensaje: 'Error al crear consulta',
                 errors: err
             });
         }
@@ -181,7 +181,7 @@ app.delete('/:id', mdAutenticacion.verificaToken, (req, res) => {
         if (err) {
             return res.status(500).json({
                 ok: false,
-                mensaje: 'Error borrar medico',
+                mensaje: 'Error borrar consulta',
                 errors: err
             });
         }
@@ -189,8 +189,8 @@ app.delete('/:id', mdAutenticacion.verificaToken, (req, res) => {
         if (!medicoBorrado) {
             return res.status(400).json({
                 ok: false,
-                mensaje: 'No existe un medico con ese id',
-                errors: { message: 'No existe un medico con ese id' }
+                mensaje: 'No existe una consulta con ese id',
+                errors: { message: 'No existe una consulta con ese id' }
             });
         }
 
